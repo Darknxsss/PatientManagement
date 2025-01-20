@@ -1,0 +1,75 @@
+﻿@model Apigo_TechnicalExam.Patient
+
+@{
+    ViewBag.Title = "Edit Patient";
+}
+
+<h2 class="mb-4 text-primary">Edit Patient</h2>
+
+<div class="card shadow-sm p-4">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.patientNo, "Patient No.", htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.patientNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Patient Number", disabled = true } })
+                @Html.ValidationMessageFor(model => model.patientNo, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.firstName, "First Name", htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.firstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter First Name", required = "required" } })
+                @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.middleName, "Middle Name", htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.middleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Middle Name", required = "required" } })
+                @Html.ValidationMessageFor(model => model.middleName, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.lastName, "Last Name", htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.lastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Last Name", required = "required" } })
+                @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.suffixName, "Suffix", htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.suffixName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Suffix" } })
+                @Html.ValidationMessageFor(model => model.suffixName, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.birthDate, "Birth Date", htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.birthDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                @Html.ValidationMessageFor(model => model.birthDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.gender, "Gender", htmlAttributes: new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.gender, new SelectList(new[] { "Male", "Female" }, Model.gender), "Select Gender", new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.initialDiagnosis, "Initial Diagnosis", htmlAttributes: new { @class = "form-label" })
+                @Html.TextAreaFor(model => model.initialDiagnosis, new { @class = "form-control", @placeholder = "Enter Initial Diagnosis", required = "required", rows = 4 })
+                @Html.ValidationMessageFor(model => model.initialDiagnosis, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <input type="submit" value="Save Changes" class="btn btn-primary px-4" />
+            <a href="@Url.Action("Index", "Home")" class="btn btn-secondary px-4">Cancel</a>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

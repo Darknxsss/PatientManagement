@@ -1,0 +1,17 @@
+﻿@model Apigo_TechnicalExam.Patient
+
+<h2>Patient Details</h2>
+<div class="card">
+    <div class="card-header">
+        @Model.lastName, @Model.firstName @Model.middleName @Model.suffixName
+    </div>
+    <div class="card-body">
+        <p><strong>Patient Number:</strong> @Model.patientNo</p>
+        <p><strong>Birth Date:</strong> @Model.birthDate.ToString("MMM dd, yyyy")</p>
+        <p><strong>Gender:</strong> @Model.gender</p>
+        <p><strong>Initial Diagnosis:</strong> @Model.initialDiagnosis</p>
+    </div>
+</div>
+<a href="@Url.Action("Index", "Home")" class="btn btn-secondary mt-2">Back</a>
+<a href="@Url.Action("Edit", "Home", new { id = @Model.id })" class="btn btn-warning mt-2">Edit</a>
+<a href="@Url.Action("Delete", "Home", new { id = @Model.id })" class="btn btn-danger mt-2">Delete</a>
