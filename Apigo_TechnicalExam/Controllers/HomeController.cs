@@ -10,10 +10,19 @@ namespace Apigo_TechnicalExam.Controllers
     public class HomeController : Controller
     {
         ApigoCRUDDbEntities _context = new ApigoCRUDDbEntities();
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
-            var listofPatients = _context.Patients.ToList();
-            return View(listofPatients);
+            var totalPatients = _context.Patients.Count();
+            var patients = _context.Patients
+                .OrderBy(p => p.id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling(totalPatients / (double)pageSize);
+
+            return View(patients);
         }
         [HttpGet]
         public ActionResult Create()
